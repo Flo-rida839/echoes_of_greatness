@@ -6,10 +6,12 @@ import Footer from './Components/Footer.jsx';
 import About from './Components/About.jsx';
 import Themes from './Components/Themes.jsx';
 import './index.css'; // Ensure this imports your global styles
+import { AuthProvider } from './Components/Authcontext.jsx';
 
 function App() {
   return (
-    // <Router> {/* Uncommented and properly placed */}
+    <AuthProvider>
+    {/* // <Router> Uncommented and properly placed */}
       <div className="App"> {/* Changed class name to match CSS */}
         <Navbar />
         
@@ -25,8 +27,10 @@ function App() {
 
         <Footer />
       </div>
-    // </Router>
+    {/* // </Router> */}
+    </AuthProvider>
   );
+  
 }
 
 export default App;

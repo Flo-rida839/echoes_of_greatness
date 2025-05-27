@@ -1,12 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ArticleContent from './ArticleContent';
-import Reflections from './Reflections';
-import ImpactRating from './ImpactRating';
-import BuildLegacy from './BuildLegacy';
-import CommentsSection from './CommentsSection';
-import Sidebar from './Sidebar';
 import '../styles/article.css';
+import { getArticleById } from './utils/api';
+
 
 function Article() {
   const { id } = useParams();
@@ -14,43 +11,51 @@ function Article() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate API fetch
-    setTimeout(() => {
-      setArticle({
-        id: id,
-        title: "Leonardo da Vinci: The Renaissance Polymath",
-        content: "Detailed article content here...",
-        image: "da-vinci.jpg",
-        era: "Renaissance",
-        timeline: [
-          { year: "1452", event: "Born in Vinci, Italy" },
-          { year: "1482", event: "Began working for Ludovico Sforza in Milan" }
-        ],
-        relatedFigures: [
-          { id: 5, name: "Michelangelo" },
-          { id: 6, name: "Raphael" }
-        ]
-      });
-      setLoading(false);
-    }, 800);
+    const fetchArticle = async () => {
+      try {
+        const data = await getArticleById(id);
+        setArticle(data);
+      } catch (error) {
+        console.error("Failed to fetch article:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticle();
   }, [id]);
 
-  if (loading) return <div className="loading">Loading Article...</div>;
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <p className="loading-text">Loading article...</p>
+        <div className="loader" />
+      </div>
+    );
+  }
 
   return (
-    <div className="article-page">
-      <div className="article-main">
+    <div className={`article-page ${article.era}`}>
+      <main className="article-main">
+        <header className="article-header">
+          <h1 className="article-title">{article.title}</h1>
+          <span className="era-tag">{article.era} Era</span>
+        </header>
+
         <ArticleContent article={article} />
-        
-        <div className="engagement-sections">
-          <Reflections />
-          <ImpactRating articleId={id} />
-          <BuildLegacy articleId={id} />
-          <CommentsSection articleId={id} />
-        </div>
-      </div>
-      
-      <Sidebar article={article} />
+
+        <section className="timeline-section">
+          <h2 className="timeline-title">Timeline of Events</h2>
+          <div className="timeline">
+            {article.timeline.map((item, index) => (
+              <div key={index} className="timeline-item">
+                <span className="year">{item.year}</span>
+                <span className="event">{item.event}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

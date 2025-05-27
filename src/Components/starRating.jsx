@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/impact-rating.css';
+import '../styles/starRating.css';
 
 
 function ImpactRating({ articleId }) {

@@ -10,19 +10,19 @@ function ArticleCarousel() {
       id: 3,
       title: "Marie Curie: Pioneer of Radioactivity",
       excerpt: "The story of the first woman to win a Nobel Prize",
-      image: "marie-curie.jpg"
+      image: "Marie-curie.jpg"
     },
     {
       id: 4,
       title: "Genghis Khan: The Mongol Conqueror",
       excerpt: "How he built the largest contiguous empire in history",
-      image: "genghis.jpg"
+      image: "Genghis.jpg"
     },
     {
       id: 5,
       title: "Joan of Arc: The Maid of Orléans",
       excerpt: "A peasant girl who changed the course of the Hundred Years' War",
-      image: "joan.jpg"
+      image: "Joanofarc.jpeg"
     }
   ];
 

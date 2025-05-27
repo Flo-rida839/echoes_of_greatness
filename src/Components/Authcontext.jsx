@@ -9,13 +9,11 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Initialize axios instance
   const api = axios.create({
-    baseURL: 'https://your-api-url.com/api',
-    withCredentials: true // For cookies if using httpOnly tokens
+    baseURL: 'https:// flowurr27.pythonanywhere.com/api', // Replace with your actual API URL
+    withCredentials: true,
   });
 
-  // Set up request interceptor for auth token
   api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -30,9 +28,8 @@ export function AuthProvider({ children }) {
       localStorage.setItem('token', response.data.token);
       setCurrentUser(response.data.user);
       navigate('/');
-      return response;
     } catch (error) {
-      throw error.response.data;
+      alert(error?.response?.data?.message || 'Signup failed');
     }
   }
 
@@ -42,9 +39,8 @@ export function AuthProvider({ children }) {
       localStorage.setItem('token', response.data.token);
       setCurrentUser(response.data.user);
       navigate('/');
-      return response;
     } catch (error) {
-      throw error.response.data;
+      alert(error?.response?.data?.message || 'Login failed');
     }
   }
 
@@ -54,9 +50,8 @@ export function AuthProvider({ children }) {
       localStorage.setItem('token', response.data.token);
       setCurrentUser(response.data.user);
       navigate('/');
-      return response;
     } catch (error) {
-      throw error.response.data;
+      alert(error?.response?.data?.message || 'Google login failed');
     }
   }
 
@@ -84,17 +79,8 @@ export function AuthProvider({ children }) {
     checkAuth();
   }, []);
 
-  const value = {
-    currentUser,
-    api,
-    signup,
-    login,
-    googleLogin,
-    logout
-  };
-
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{ currentUser, api, signup, login, googleLogin, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );

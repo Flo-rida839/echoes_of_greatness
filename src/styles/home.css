@@ -1,99 +1,222 @@
-/* Home.css */
-.hero {
-  background: 
-    linear-gradient(rgba(62, 39, 35, 0.7), rgba(139, 90, 43, 0.3)), /* Sepia-toned gradient */
-    url('/public/images/hero2.jpeg') center/cover; /* Remove 'public' from path */
-  height: 70vh;
-  min-height: 500px; /* Ensure minimum height on mobile */
+/* article.css */
+
+/* General parchment background and texture */
+.article-wrapper {
+  font-family: 'IM Fell English', serif; /* Elegant old-style serif font */
+  color: #3e2f1c; /* Dark parchment ink color */
+  background-color: #fdf6e3; /* Light parchment background */
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.parchment-header {
+  background: rgba(240, 225, 190, 0.85); /* Slightly transparent parchment tone */
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.nav-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #5b4427;
+  text-shadow: 1px 1px 0 #d9c89a;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-btn {
+  background: #cbb67c;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.1rem;
+  font-weight: 600;
+  color: #3e2f1c;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #F5F5DC; /* Cream color */
+}
+
+.nav-btn:hover {
+  background: #d4be73;
+}
+
+.nav-user {
+  font-style: italic;
+  color: #6b552f;
+  margin-right: 1rem;
+}
+
+/* Article main container */
+.article-page {
+  flex: 1;
+  max-width: 900px;
+  margin: 2rem auto 3rem;
+  padding: 2rem 3rem;
+  background: rgba(251, 242, 224, 0.95);
+  border-radius: 12px;
+  box-shadow: inset 0 0 15px #e5d4a3;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  transition: opacity 0.8s ease-in-out;
   position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 0L100 50 50 100 0 50Z" fill="%233e2723" opacity="0.05"/></svg>');
-  pointer-events: none;
+/* Ink dry effect */
+.ink-dry {
+  opacity: 1;
 }
 
-.hero-content {
-  text-align: center;
-  max-width: 800px;
-  padding: 2rem;
-  position: relative;
-  z-index: 1;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+.ancient-scroll {
+  font-family: 'IM Fell English', serif;
+  color: #4b3a0a;
 }
 
-.hero h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.8rem;
+/* Historical header styles */
+.historical-header {
   margin-bottom: 1.5rem;
 }
 
-.featured-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2.5rem;
-  padding: 4rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+.illuminated-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  text-shadow: 2px 2px 3px #b69e53;
+  color: #6b4e1e;
+  margin-bottom: 0.3rem;
 }
 
-.featured-article {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-.featured-article:hover {
-  transform: translateY(-5px);
-}
-
-.article-image {
-  height: 250px;
-  overflow: hidden;
-  position: relative;
-}
-
-.article-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.featured-article:hover .article-image img {
-  transform: scale(1.05);
+.elegant-drop-shadow {
+  text-shadow: 3px 3px 5px rgba(120, 92, 34, 0.8);
 }
 
 .era-badge {
-  background: #8B5A2B; /* Sepia color */
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  font-size: 0.9rem;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 1.2rem;
+  background: #d8c88a;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  color: #5a4420;
+  box-shadow: inset 0 0 8px #b29e4c;
+  display: inline-block;
 }
 
-.article-content {
-  padding: 1.5rem;
+/* Article image styling */
+.article-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: 15px;
+  box-shadow: 0 0 20px 5px rgba(181, 157, 98, 0.5);
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
-.read-more {
-  color:#8B5A2B
+.article-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px 8px rgba(181, 157, 98, 0.8);
+}
+
+/* Engagement sections */
+.engagement-sections {
+  margin-top: 3rem;
+  font-family: 'Georgia', serif;
+}
+
+.section-header {
+  border-bottom: 2px solid #d9c89a;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 2rem;
+  color: #6b4e1e;
+}
+
+.section-subtitle {
+  font-style: italic;
+  color: #8c7b46;
+  margin-top: 0.3rem;
+}
+
+.first-letter {
+  font-size: 3rem;
+  font-weight: 700;
+  float: left;
+  line-height: 1;
+  padding-right: 0.15em;
+  color: #a88a32;
+  font-family: 'Cinzel Decorative', cursive;
+}
+
+/* Sidebar styling */
+.sidebar {
+  background: #e4dcb3;
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: 'Georgia', serif;
+  color: #5a472d;
+  box-shadow: 0 0 15px #c9b87a;
+  margin-top: 2rem;
+}
+
+/* Loading Screen */
+.loading.ancient-parchment {
+  text-align: center;
+  font-family: 'IM Fell English', serif;
+  color: #5b4721;
+  padding: 5rem 2rem;
+}
+
+.scribe-animation {
+  font-size: 3rem;
+  margin: 1rem 0;
+  animation: scribble 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes scribble {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(15deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .article-page {
+    padding: 1.5rem 1.5rem;
+    margin: 1rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+  }
+
+  .nav-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .illuminated-title {
+    font-size: 2.2rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
 }
