@@ -1,0 +1,52 @@
+.article-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .article-content h1 {
+    font-family: 'Playfair Display', serif;
+    color: #3E2723;
+    margin-bottom: 1.5rem;
+  }
+  
+  .article-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #5D4037;
+  }
+  
+  .article-body img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+  }
+  
+  .article-meta {
+    font-size: 0.9rem;
+    color: #8D6E63;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #D7CCC8;
+  }
+  .article-image {
+    position: relative;
+    margin: 2rem 0;
+  }
+  
+  .article-image img {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+  }
+  
+  .section-image {
+    width: 80%;
+    margin: 1.5rem auto;
+    display: block;
+  }

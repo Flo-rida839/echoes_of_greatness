@@ -1,0 +1,59 @@
+.build-legacy {
+    background-color: #FFF8F1;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+  
+  .build-legacy h2 {
+    color: #5D4037;
+    margin-bottom: 1.5rem;
+  }
+  
+  .build-legacy form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    color: #5D4037;
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 0.8rem;
+    border: 1px solid #D7CCC8;
+    border-radius: 4px;
+    font-family: inherit;
+  }
+  
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .contributions-list {
+    margin-top: 2rem;
+  }
+  
+  .contributions-list h3 {
+    color: #5D4037;
+    margin-bottom: 1rem;
+  }
+  
+  .contributions-list a {
+    color: #8D6E63;
+    text-decoration: none;
+  }
+  
+  .contributions-list a:hover {
+    text-decoration: underline;
+  }

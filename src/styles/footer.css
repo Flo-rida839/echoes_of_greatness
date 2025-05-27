@@ -1,0 +1,148 @@
+/* footer.css */
+.footer-container {
+  background: #3E2723; /* Deep brown */
+  color: #D2B48C; /* Tan */
+  position: relative;
+  overflow: hidden;
+  padding: 3rem 2rem 1rem;
+  border-top: 3px solid #8B5A2B; /* Sepia border */
+}
+
+.hieroglyph-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  background-image: url('/public/images/hieroglyphics.jpeg');
+  pointer-events: none;
+}
+
+.historical-marquee {
+  background: rgba(139, 90, 43, 0.3); /* Sepia overlay */
+  padding: 1rem 0;
+  margin: -3rem -2rem 2rem;
+  border-bottom: 2px solid #5D4037;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.marquee-icon {
+  margin: 0 2rem;
+  color: #D2B48C;
+  font-size: 1.2rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  color: #D2B48C;
+  margin: 1rem 0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #F5F5DC;
+}
+
+.social-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.testimonial-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.testimonial {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  margin: 1rem;
+  min-width: 250px;
+  position: relative;
+  border-radius: 4px;
+}
+
+.papyrus-texture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/public/images/papyrus.jpeg');
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.testimonial-text {
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #8B5A2B;
+  color: #F5F5DC;
+}
+
+.newsletter-button {
+  background: #8B5A2B;
+  color: #F5F5DC;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.newsletter-button:hover {
+  background: #6D4C41;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #5D4037;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .marquee-content {
+    animation: scroll 20s linear infinite;
+  }
+}

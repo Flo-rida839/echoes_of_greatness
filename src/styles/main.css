@@ -1,0 +1,30 @@
+/* Global Variables and Base Styles */
+:root {
+    --primary-color: #8B5A2B; /* Sepia brown */
+    --secondary-color: #D2B48C; /* Tan */
+    --accent-color: #A0522D; /* Sienna */
+    --light-color: #F5F5DC; /* Beige */
+    --dark-color: #3E2723; /* Dark brown */
+    --text-color: #333;
+    --text-light: #666;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'EB Garamond', serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--light-color);
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--dark-color);
+  }
+  
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Playfair+Display:wght@500&display=swap');

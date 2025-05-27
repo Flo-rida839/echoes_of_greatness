@@ -1,0 +1,16 @@
+.star-rating {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  .star {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .star.active {
+    color: var(--primary-color);
+  }
