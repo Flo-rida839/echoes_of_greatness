@@ -1,52 +1,128 @@
-.article-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: white;
+.carousel-container {
+  position: relative;
+  max-width: 800px;
+  margin: 2rem auto;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 0 16px rgba(90, 70, 50, 0.3);
+  background: #fff8e7;
+}
+
+.carousel {
+  position: relative;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1s ease;
+  padding: 1rem;
+  text-align: center;
+}
+
+.slide.active {
+  opacity: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.slide-content h3 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-family: 'Cinzel', serif;
+}
+
+.slide-content p {
+  font-family: 'Garamond', serif;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  text-decoration: none;
+  color: #b48b4e;
+  font-weight: bold;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 248, 220, 0.9);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 50%;
+  z-index: 2;
+  color: #6d5435;
+}
+
+.nav-button.left {
+  left: 10px;
+}
+.nav-button.right {
+  right: 10px;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #c2a678;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  transform: scale(1.3);
+  background: #a0794f;
+}
+
+.progress-bar {
+  height: 5px;
+  width: 100%;
+  background: #eee2c8;
+  margin-top: -6px;
+}
+
+.progress {
+  height: 100%;
+  background: #b48b4e;
+  transition: width 0.1s linear;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .carousel-container {
+    max-width: 95%;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
-  
-  .article-content h1 {
-    font-family: 'Playfair Display', serif;
-    color: #3E2723;
-    margin-bottom: 1.5rem;
+
+  .carousel-image {
+    max-height: 200px;
   }
-  
-  .article-body {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #5D4037;
+
+  .slide-content h3 {
+    font-size: 1.2rem;
   }
-  
-  .article-body img {
-    max-width: 100%;
-    height: auto;
-    margin: 1.5rem 0;
-    border-radius: 8px;
+
+  .nav-button {
+    font-size: 1.5rem;
   }
-  
-  .article-meta {
-    font-size: 0.9rem;
-    color: #8D6E63;
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid #D7CCC8;
-  }
-  .article-image {
-    position: relative;
-    margin: 2rem 0;
-  }
-  
-  .article-image img {
-    width: 100%;
-    height: auto;
-    max-height: 60vh;
-    object-fit: contain;
-  }
-  
-  .section-image {
-    width: 80%;
-    margin: 1.5rem auto;
-    display: block;
-  }
+}

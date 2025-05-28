@@ -1,24 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .navbar {
-    background-color: var(--light-color);
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
+  font-family: 'Noto Serif', serif;
+}
+
+.nav-menu {
+  @apply md:flex md:items-center;
+}
+
+.nav-item {
+  @apply text-lg font-['Cinzel'];
+}
+
+.nav-link {
+  @apply text-amber-900 no-underline;
+}
+
+.nav-menu.block {
+  @apply bg-parchment shadow-md;
+}
+
+.hamburger-icon {
+  @apply transition-transform duration-300;
+}
+
+.navbar-logo h1 {
+  @apply m-0;
+}
+
+@layer components {
+  .nav-menu {
+    @apply md:space-x-6;
   }
-  
-  .navbar-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: var(--dark-color);
-  }
-  
-  .nav-link {
-    color: var(--text-color);
-    transition: color 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    color: var(--primary-color);
-  }
+}

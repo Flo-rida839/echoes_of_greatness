@@ -1,3 +1,4 @@
+// src/Signup.jsx
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
@@ -7,13 +8,15 @@ export default function SignupPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     try {
       await signup({ name, email, password });
     } catch (err) {
-      // Error handled in context
+      setError(err.response?.data?.error || 'Failed to sign up');
     }
   };
 
@@ -21,6 +24,7 @@ export default function SignupPage() {
     <div className="min-h-screen bg-[url('/parchment-bg.jpg')] bg-cover flex items-center justify-center">
       <form onSubmit={handleSubmit} className="bg-[#fef3c7]/80 shadow-xl p-8 rounded-2xl border-4 border-[#9c7b3e] w-full max-w-md font-serif">
         <h1 className="text-3xl text-center text-[#6b4c1e] font-bold mb-6">📜 Ancient Signup Scroll</h1>
+        {error && <p className="text-red-600 text-center mb-4">{error}</p>}
         <input
           type="text"
           placeholder="Name to inscribe"

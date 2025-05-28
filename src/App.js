@@ -1,21 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './Components/Home.jsx';
 import Article from './Components/Article.jsx';
-import Navbar from './Components/Navbar.jsx';
 import Footer from './Components/Footer.jsx';
 import About from './Components/About.jsx';
 import Themes from './Components/Themes.jsx';
-import './index.css'; // Ensure this imports your global styles
-import { AuthProvider } from './Components/Authcontext.jsx';
+import './index.css';
+import { AuthProvider } from './Context/Authcontext.jsx';
 
 function App() {
   return (
     <AuthProvider>
-    {/* // <Router> Uncommented and properly placed */}
-      <div className="App"> {/* Changed class name to match CSS */}
-        <Navbar />
+      <div className="App">
         
-        {/* Added content wrapper with parchment effect */}
         <div className="content-wrapper">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -24,13 +20,10 @@ function App() {
             <Route path="/themes" element={<Themes />} />
           </Routes>
         </div>
-
         <Footer />
       </div>
-    {/* // </Router> */}
     </AuthProvider>
   );
-  
 }
 
 export default App;

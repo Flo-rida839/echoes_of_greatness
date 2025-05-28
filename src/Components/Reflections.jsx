@@ -1,65 +1,91 @@
-import { useState } from 'react';
+// src/Reflections.jsx
+import { useState, useEffect } from 'react';
+import { useAuth } from '../Context/Authcontext';
+import { getReflections, postReflection } from '../utils/api';
+import { Link } from 'react-router-dom';
 import '../styles/reflections.css';
 
-function Reflections() {
-  const [reflection, setReflection] = useState('');
-  const [submittedReflections, setSubmittedReflections] = useState([]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+function Reflections({ articleId }) {
+  const { user } = useAuth();
+  const [reflections, setReflections] = useState([]);
+  const [content, setContent] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    async function fetchReflections() {
+      setLoading(true);
+      try {
+        const data = await getReflections(articleId);
+        setReflections(data);
+      } catch (err) {
+        setError(err.response?.data?.error || 'Failed to load reflections');
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchReflections();
+  }, [articleId]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (reflection.trim()) {
-      setIsSubmitting(true);
-      // Simulate processing delay
-      setTimeout(() => {
-        setSubmittedReflections([...submittedReflections, reflection]);
-        setReflection('');
-        setIsSubmitting(false);
-      }, 500);
+    if (!user) {
+      setError('Please log in to post a reflection');
+      return;
+    }
+    if (!content.trim()) {
+      setError('Reflection content cannot be empty');
+      return;
+    }
+    try {
+      await postReflection(articleId, content);
+      setContent('');
+      setError('');
+      const data = await getReflections(articleId);
+      setReflections(data);
+    } catch (err) {
+      setError(err.response?.data?.error || 'Failed to post reflection');
     }
   };
 
+  if (loading) {
+    return <p>Loading reflections...</p>;
+  }
+
   return (
-    <section className="reflections">
-      <div className="reflections-header">
-        <h2>Reflections & Connections</h2>
-        <p className="subtitle">How does this historical figure's story resonate with you today?</p>
-      </div>
-      
-      <form onSubmit={handleSubmit} className="reflection-form">
-        <textarea
-          value={reflection}
-          onChange={(e) => setReflection(e.target.value)}
-          placeholder="Share your thoughts..."
-          rows="5"
-          className="reflection-input"
-        />
-        <button 
-          type="submit" 
-          className="submit-btn"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? 'Sharing...' : 'Submit Reflection'}
-          <span className="ink-effect"></span>
-        </button>
-      </form>
-      
-      {submittedReflections.length > 0 && (
-        <div className="reflections-list">
-          <h3 className="community-title">Community Reflections</h3>
-          <ul>
-            {submittedReflections.map((item, index) => (
-              <li key={index} className="reflection-item">
-                <div className="quote-icon">"</div>
-                <p>{item}</p>
-                <div className="reflection-meta">
-                  <span className="timestamp">Just now</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <section className="reflections-section">
+      <h2>Share Your Reflections</h2>
+      {error && <p className="text-red-600 text-center mb-4">{error}</p>}
+      {user ? (
+        <form onSubmit={handleSubmit} className="reflection-form">
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Reflect on this historical figure..."
+            className="w-full p-3 rounded-xl border-2 border-[#d6b760] bg-[#fff9e6]"
+          />
+          <button
+            type="submit"
+            className="bg-[#9c7b3e] text-white font-semibold py-2 px-4 rounded-xl hover:bg-[#b08948] transition duration-300"
+          >
+            Submit Reflection
+          </button>
+        </form>
+      ) : (
+        <p>Please <Link to="/login" className="underline">log in</Link> to share a reflection</p>
       )}
+      <div className="reflections-list">
+        {reflections.length > 0 ? (
+          reflections.map((reflection) => (
+            <div key={reflection.id} className="reflection">
+              <p><strong>{reflection.username}</strong> ({new Date(reflection.created_at).toLocaleDateString()})</p>
+              <p>{reflection.content}</p>
+            </div>
+          ))
+        ) : (
+          <p>No reflections yet. Be the first to share!</p>
+        )}
+      </div>
     </section>
   );
 }

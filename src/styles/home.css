@@ -1,222 +1,96 @@
-/* article.css */
+/* home.css */
 
-/* General parchment background and texture */
-.article-wrapper {
-  font-family: 'IM Fell English', serif; /* Elegant old-style serif font */
-  color: #3e2f1c; /* Dark parchment ink color */
-  background-color: #fdf6e3; /* Light parchment background */
+.home {
+  padding: 2rem;
+  background-image: url('/public/images/parchment-bg.jpg');
+  background-size: cover;
+  background-attachment: fixed;
   min-height: 100vh;
+}
+
+.page-title {
+  font-family: 'Cinzel Decorative', cursive;
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #5a4634;
+  text-shadow: 2px 2px #e6d3a3;
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.article-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-card {
+  background-color: rgba(255, 248, 220, 0.95); /* light parchment */
+  border: 3px solid #d2b48c;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 4px 4px 12px rgba(90, 70, 50, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
-/* Navbar */
-.parchment-header {
-  background: rgba(240, 225, 190, 0.85); /* Slightly transparent parchment tone */
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Cormorant Garamond', serif;
+.article-card:hover {
+  transform: scale(1.03);
+  box-shadow: 6px 6px 20px rgba(90, 70, 50, 0.4);
 }
 
-.nav-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #5b4427;
-  text-shadow: 1px 1px 0 #d9c89a;
+.card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 2px solid #c2a678;
 }
 
-.nav-links {
-  display: flex;
-  gap: 1rem;
-}
-
-.nav-btn {
-  background: #cbb67c;
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1.1rem;
-  font-weight: 600;
-  color: #3e2f1c;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-btn:hover {
-  background: #d4be73;
-}
-
-.nav-user {
-  font-style: italic;
-  color: #6b552f;
-  margin-right: 1rem;
-}
-
-/* Article main container */
-.article-page {
-  flex: 1;
-  max-width: 900px;
-  margin: 2rem auto 3rem;
-  padding: 2rem 3rem;
-  background: rgba(251, 242, 224, 0.95);
-  border-radius: 12px;
-  box-shadow: inset 0 0 15px #e5d4a3;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  transition: opacity 0.8s ease-in-out;
-  position: relative;
-}
-
-/* Ink dry effect */
-.ink-dry {
-  opacity: 1;
-}
-
-.ancient-scroll {
-  font-family: 'IM Fell English', serif;
-  color: #4b3a0a;
-}
-
-/* Historical header styles */
-.historical-header {
-  margin-bottom: 1.5rem;
-}
-
-.illuminated-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3rem;
-  font-weight: 900;
-  text-shadow: 2px 2px 3px #b69e53;
-  color: #6b4e1e;
-  margin-bottom: 0.3rem;
-}
-
-.elegant-drop-shadow {
-  text-shadow: 3px 3px 5px rgba(120, 92, 34, 0.8);
-}
-
-.era-badge {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 1.2rem;
-  background: #d8c88a;
-  padding: 0.3rem 0.8rem;
-  border-radius: 10px;
-  color: #5a4420;
-  box-shadow: inset 0 0 8px #b29e4c;
-  display: inline-block;
-}
-
-/* Article image styling */
-.article-image {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 1.5rem 0;
-  border-radius: 15px;
-  box-shadow: 0 0 20px 5px rgba(181, 157, 98, 0.5);
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.article-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px 8px rgba(181, 157, 98, 0.8);
-}
-
-/* Engagement sections */
-.engagement-sections {
-  margin-top: 3rem;
-  font-family: 'Georgia', serif;
-}
-
-.section-header {
-  border-bottom: 2px solid #d9c89a;
-  margin-bottom: 1rem;
-}
-
-.section-header h2 {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 2rem;
-  color: #6b4e1e;
-}
-
-.section-subtitle {
-  font-style: italic;
-  color: #8c7b46;
-  margin-top: 0.3rem;
-}
-
-.first-letter {
-  font-size: 3rem;
-  font-weight: 700;
-  float: left;
-  line-height: 1;
-  padding-right: 0.15em;
-  color: #a88a32;
-  font-family: 'Cinzel Decorative', cursive;
-}
-
-/* Sidebar styling */
-.sidebar {
-  background: #e4dcb3;
-  border-radius: 8px;
+.card-content {
   padding: 1rem;
-  font-family: 'Georgia', serif;
-  color: #5a472d;
-  box-shadow: 0 0 15px #c9b87a;
-  margin-top: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Loading Screen */
-.loading.ancient-parchment {
-  text-align: center;
-  font-family: 'IM Fell English', serif;
-  color: #5b4721;
-  padding: 5rem 2rem;
+.card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #3c2c1e;
 }
 
-.scribe-animation {
-  font-size: 3rem;
-  margin: 1rem 0;
-  animation: scribble 1.5s ease-in-out infinite alternate;
+.card-era {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: #7b5e3d;
+  margin-bottom: 0.75rem;
+  font-style: italic;
 }
 
-@keyframes scribble {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(15deg);
-  }
+.card-excerpt {
+  font-family: 'Garamond', serif;
+  font-size: 0.95rem;
+  color: #4a3b28;
+  line-height: 1.4;
 }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .article-page {
-    padding: 1.5rem 1.5rem;
-    margin: 1rem;
+.article-card:hover {
+  border-color: #bda66e;
+  box-shadow: 0 0 15px rgba(186, 157, 99, 0.6);
+}
+@media (max-width: 600px) {
+  .home {
+    padding: 1rem;
   }
 
-  .nav-links {
-    gap: 0.5rem;
-  }
-
-  .nav-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-  }
-
-  .illuminated-title {
-    font-size: 2.2rem;
-  }
-
-  .section-header h2 {
-    font-size: 1.5rem;
+  .page-title {
+    font-size: 2rem;
   }
 }
