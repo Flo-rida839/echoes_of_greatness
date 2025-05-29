@@ -6,6 +6,8 @@ import About from './Components/About.jsx';
 import Themes from './Components/Themes.jsx';
 import './index.css';
 import { AuthProvider } from './Context/Authcontext.jsx';
+import Privacy from './Components/Privacy.jsx'
+import Contact from './Components/Contact.jsx'
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
             <Route path="/article/:id" element={<Article />} />
             <Route path="/about" element={<About />} />
             <Route path="/themes" element={<Themes />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
           </Routes>
         </div>
         <Footer />

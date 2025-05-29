@@ -1,37 +1,121 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Garamond&display=swap');
 
+/* CSS Variables */
+:root {
+  --amber-900: #78350f;
+  --amber-800: #92400e;
+  --parchment-bg: #f5e8c7;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --transition-ease: all 0.3s ease;
+}
+
+/* Ancient Parchment Background */
+.bg-ancient-parchment {
+  background-image: url('/public/images/frenchRev.jpg');
+  background-color: var(--parchment-bg);
+  background-blend-mode: overlay;
+  background-size: cover;
+  opacity: 0.95;
+}
+
+/* Navbar Styles */
 .navbar {
-  font-family: 'Noto Serif', serif;
+  font-family: 'Noto Serif', 'Garamond', serif;
 }
 
-.nav-menu {
-  @apply md:flex md:items-center;
-}
-
-.nav-item {
-  @apply text-lg font-['Cinzel'];
+.navbar-brand h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--amber-900);
+  margin: 0;
 }
 
 .nav-link {
-  @apply text-amber-900 no-underline;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: var(--amber-900);
+  transition: var(--transition-ease);
 }
 
-.nav-menu.block {
-  @apply bg-parchment shadow-md;
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--amber-800);
+  transform: translateY(-1px);
 }
 
-.hamburger-icon {
-  @apply transition-transform duration-300;
+/* Buttons */
+.btn-amber {
+  background-color: var(--amber-900);
+  border-color: var(--amber-900);
+  font-family: 'Noto Serif', 'Garamond', serif;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  transition: var(--transition-ease);
+  position: relative;
+  overflow: hidden;
 }
 
-.navbar-logo h1 {
-  @apply m-0;
+.btn-amber:hover {
+  background-color: var(--amber-800);
+  border-color: var(--amber-800);
+  transform: scale(1.05);
 }
 
-@layer components {
-  .nav-menu {
-    @apply md:space-x-6;
+.btn-amber::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('/public/images/papyrus.jpeg');
+  background-size: cover;
+  opacity: 0.3;
+}
+
+/* Hover Scale */
+.hover-scale {
+  transition: var(--transition-ease);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Elegant Shadow */
+.elegant-drop-shadow {
+  text-shadow: 1px 1px 3px var(--shadow-color);
+}
+
+/* Toggler */
+.navbar-toggler {
+  border: none;
+  color: var(--amber-900);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%2378350f' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-collapse {
+  transition: var(--transition-ease);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background: var(--parchment-bg);
+    padding: 1rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+  }
+  .nav-link,
+  .btn-amber {
+    padding: 0.5rem 1rem;
+  }
+  .btn-amber {
+    width: 100%;
+    text-align: center;
+    margin: 0.25rem 0;
   }
 }

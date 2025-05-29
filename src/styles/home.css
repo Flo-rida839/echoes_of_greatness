@@ -1,96 +1,301 @@
-/* home.css */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Garamond&display=swap');
 
-.home {
-  padding: 2rem;
-  background-image: url('/public/images/parchment-bg.jpg');
+/* CSS Variables */
+:root {
+  --amber-900: #78350f;
+  --amber-800: #92400e;
+  --amber-700: #b45309;
+  --parchment-bg: #f5e8c7;
+  --parchment-light-bg: #fef9e7;
+  --parchment-border: #d4a373;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --transition-ease: all 0.3s ease;
+}
+
+/* Global Styles */
+body {
+  font-family: 'Noto Serif', 'Garamond', serif;
+  background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
+  background-color: var(--parchment-bg);
+  background-blend-mode: overlay;
   background-size: cover;
-  background-attachment: fixed;
-  min-height: 100vh;
+  background-position: center;
+  background-repeat: repeat;
 }
 
-.page-title {
-  font-family: 'Cinzel Decorative', cursive;
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  color: #5a4634;
-  text-shadow: 2px 2px #e6d3a3;
+/* Parchment Backgrounds */
+.bg-parchment {
+  background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
+  background-color: var(--parchment-bg);
+  background-blend-mode: overlay;
 }
 
-.article-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+.bg-parchment-light {
+  background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+  background-color: var(--parchment-light-bg);
+  background-blend-mode: overlay;
 }
 
-.article-card-link {
+/* Footer */
+.footer {
+  background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+  background-color: #3f2a1d;
+  background-blend-mode: overlay;
+  color: var(--parchment-light-bg);
+  padding: 2rem 1rem;
+  margin-top: 2rem;
+  border-top: 2px solid var(--parchment-border);
+  box-shadow: 0 -2px 8px var(--shadow-color);
+}
+
+.footer a {
+  color: var(--parchment-light-bg);
   text-decoration: none;
-  color: inherit;
+  transition: var(--transition-ease);
 }
 
+.footer a:hover {
+  color: var(--amber-700);
+}
+
+.footer .font-noto {
+  color: var(--parchment-light-bg);
+}
+
+.footer .elegant-drop-shadow {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Parchment Border */
+.border-parchment {
+  border: 2px solid var(--parchment-border);
+  border-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png') 10;
+}
+
+/* Typography */
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  color: var(--amber-900);
+}
+
+.font-noto {
+  font-family: 'Noto Serif', 'Garamond', serif;
+  color: var(--amber-900);
+}
+
+.elegant-drop-shadow {
+  text-shadow: 1px 1px 3px var(--shadow-color);
+}
+
+.text-amber-900 { color: var(--amber-900); }
+.text-amber-800 { color: var(--amber-800); }
+.text-amber-700 { color: var(--amber-700); }
+
+/* Article Section */
+.article-section {
+  position: relative;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.article-section::before {
+  content: '';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background-image: url('https://www.transparenttextures.com/patterns/wax-seal.png');
+  background-size: cover;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Article Cards */
 .article-card {
-  background-color: rgba(255, 248, 220, 0.95); /* light parchment */
-  border: 3px solid #d2b48c;
-  border-radius: 16px;
+  transition: var(--transition-ease);
+  animation: fadeIn 0.6s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.75);
+  position: relative;
   overflow: hidden;
-  box-shadow: 4px 4px 12px rgba(90, 70, 50, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .article-card:hover {
-  transform: scale(1.03);
-  box-shadow: 6px 6px 20px rgba(90, 70, 50, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px var(--shadow-color);
 }
 
-.card-image {
-  width: 100%;
+.card-img-top {
   height: 180px;
   object-fit: cover;
-  border-bottom: 2px solid #c2a678;
-}
-
-.card-content {
-  padding: 1rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
 }
 
 .card-title {
   font-family: 'Cinzel', serif;
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  color: #3c2c1e;
+  color: var(--amber-900);
 }
 
 .card-era {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  color: #7b5e3d;
-  margin-bottom: 0.75rem;
   font-style: italic;
+  color: var(--amber-700);
 }
 
 .card-excerpt {
-  font-family: 'Garamond', serif;
-  font-size: 0.95rem;
-  color: #4a3b28;
-  line-height: 1.4;
+  color: #4b5563; /* Gray-600 */
 }
-.article-card:hover {
-  border-color: #bda66e;
-  box-shadow: 0 0 15px rgba(186, 157, 99, 0.6);
+
+/* Buttons */
+.btn-amber {
+  background-color: var(--amber-900);
+  border-color: var(--amber-900);
+  font-family: 'Noto Serif', 'Garamond', serif;
+  transition: var(--transition-ease);
 }
-@media (max-width: 600px) {
-  .home {
+
+.btn-amber:hover {
+  background-color: var(--amber-800);
+  border-color: var(--amber-800);
+  transform: scale(1.05);
+}
+
+/* Icons */
+.scribe-animation {
+  animation: spin 2s linear infinite;
+  color: var(--amber-800);
+}
+
+.fas.fa-scroll,
+.fas.fa-book-dead {
+  color: var(--amber-800);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Doodle Animations */
+.header-doodle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 100px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg"><path d="M20,80 C40,60 80,40 100,40 C120,40 160,60 180,80" fill="none" stroke="%2378350f" stroke-width="2" stroke-dasharray="1000" stroke-dashoffset="1000"/></svg>');
+  background-size: contain;
+  opacity: 0.3;
+  z-index: -1;
+  animation: draw 5s ease-in-out forwards;
+}
+
+.card-doodle {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 50px;
+  height: 50px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="25" r="20" fill="none" stroke="%2378350f" stroke-width="2"/><path d="M25,15 L30,20 L25,25 L20,20 Z" fill="%2378350f"/></svg>');
+  background-size: contain;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.article-card:hover .card-doodle {
+  opacity: 0.5;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 1000;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.3;
+  }
+}
+
+/* Cartoon and GIFs */
+.scribe-cartoon {
+  width: 60px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.candle-gif {
+  width: 80px;
+  height: auto;
+}
+
+.book-gif {
+  width: 100px;
+  height: auto;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767.98px) {
+  .article-section {
     padding: 1rem;
   }
-
-  .page-title {
+  .card-img-top {
+    height: 160px;
+  }
+  .article-section::before {
+    width: 30px;
+    height: 30px;
+    top: -15px;
+  }
+  .display-4 {
     font-size: 2rem;
+  }
+  .fs-5 {
+    font-size: 1rem;
+  }
+  .footer {
+    padding: 1.5rem 0.75rem;
+  }
+  .header-doodle {
+    width: 150px;
+  }
+  .scribe-cartoon {
+    width: 50px;
+  }
+  .candle-gif {
+    width: 60px;
+  }
+  .book-gif {
+    width: 80px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .article-section {
+    padding: 0.75rem;
+  }
+  .card-img-top {
+    height: 140px;
+  }
+  .footer {
+    text-align: center;
+  }
+  .header-doodle {
+    width: 120px;
+  }
+  .card-doodle {
+    width: 40px;
   }
 }
