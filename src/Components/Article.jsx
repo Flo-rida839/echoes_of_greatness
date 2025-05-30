@@ -7,6 +7,7 @@ import ImpactRating from './ImpactRating';
 import CommentsSection from './CommentsSection';
 import { getArticleById } from '../utils/api';
 import '../styles/article.css';
+import Themes from './Themes';
 
 function Article() {
   const { id } = useParams();

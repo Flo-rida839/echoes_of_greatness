@@ -119,3 +119,19 @@
     margin: 0.25rem 0;
   }
 }
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.profile-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.1);
+}

@@ -1,0 +1,32 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../Context/Authcontext';
+import '../styles/admin-dashboard.css';
+
+function AdminDashboard() {
+  const { user } = useAuth();
+
+  if (!user || !['editor', 'admin'].includes(user.role)) {
+    return (
+      <div className="admin-dashboard-wrapper ancient-parchment">
+        <h1 className="illuminated-title elegant-drop-shadow">Access Denied</h1>
+        <p className="medieval-flair">You must be an editor or admin to access the dashboard.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="admin-dashboard-wrapper ancient-parchment">
+      <h1 className="illuminated-title elegant-drop-shadow">Admin Dashboard</h1>
+      <p className="medieval-flair">Welcome, {user.username}, to the Scribe’s Sanctum.</p>
+      <div className="dashboard-options">
+        <Link to="/admin/create-article" className="dashboard-btn medieval-flair">
+          Create New Scroll
+        </Link>
+        {/* Add more admin options here (e.g., manage users, edit articles) */}
+      </div>
+    </div>
+  );
+}
+
+export default AdminDashboard;

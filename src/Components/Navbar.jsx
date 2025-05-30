@@ -1,7 +1,18 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../Context/Authcontext';
 import '../styles/navbar.css';
 
 function Navbar() {
+  const { user, logout } = useAuth();
+
+  const getInitial = (username) => {
+    return username ? username.charAt(0).toUpperCase() : '';
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <nav className="navbar navbar-expand-lg fixed-top bg-ancient-parchment text-amber-900 shadow-sm">
       <div className="container">
@@ -46,16 +57,43 @@ function Navbar() {
                 Privacy
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="btn btn-amber btn-sm mx-2 my-1 font-noto text-white hover-scale" to="/login">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="btn btn-amber btn-sm mx-2 my-1 font-noto text-white hover-scale" to="/signup">
-                Signup
-              </Link>
-            </li>
+            {user && user.role === 'editor' && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/admin">
+                  Admin
+                </Link>
+              </li>
+            )}
+            {user ? (
+              <>
+                <li className="nav-item">
+                  <div className="profile-avatar bg-amber-700 text-white font-cinzel rounded-full w-8 h-8 flex items-center justify-center mx-2">
+                    {getInitial(user.username)}
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <button
+                    className="btn btn-amber btn-sm mx-2 my-1 font-noto text-white hover-scale"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className="btn btn-amber btn-sm mx-2 my-1 font-noto text-white hover-scale" to="/login">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="btn btn-amber btn-sm mx-2 my-1 font-noto text-white hover-scale" to="/signup">
+                    Signup
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

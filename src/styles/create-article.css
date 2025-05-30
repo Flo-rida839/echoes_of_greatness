@@ -1,0 +1,193 @@
+/* src/styles/create-article.css */
+
+.create-article-wrapper {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-image: url('/public/images/parchment-bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    border: 4px solid #8b6f47; /* Aged wood border */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .ancient-parchment {
+    background-color: rgba(245, 245, 220, 0.9); /* Semi-transparent parchment */
+    color: #2c2c2c;
+    font-family: 'Cinzel', serif; /* Medieval-style font */
+  }
+  
+  .illuminated-title {
+    font-size: 2.5rem;
+    color: #4a2c0b;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .elegant-drop-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .error-message {
+    background-color: #8b0000;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .medieval-flair {
+    border: 2px solid #8b6f47;
+    background-color: #f5f5dc;
+    color: #2c2c2c;
+    transition: all 0.3s ease;
+  }
+  
+  .medieval-flair:hover {
+    background-color: #e0d5a5;
+    transform: translateY(-2px);
+  }
+  
+  .article-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4a2c0b;
+  }
+  
+  .form-input,
+  .form-textarea,
+  .form-select {
+    padding: 0.8rem;
+    border: 2px solid #8b6f47;
+    border-radius: 4px;
+    background-color: rgba(245, 245, 220, 0.8);
+    font-family: 'Times New Roman', serif;
+    font-size: 1rem;
+    color: #2c2c2c;
+  }
+  
+  .form-textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .form-select[multiple] {
+    height: 120px;
+  }
+  
+  .timeline-input-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .timeline-year {
+    width: 100px;
+  }
+  
+  .timeline-event {
+    flex-grow: 1;
+  }
+  
+  .add-timeline-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .timeline-preview {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(245, 245, 220, 0.7);
+    border: 1px solid #8b6f47;
+    border-radius: 4px;
+  }
+  
+  .timeline-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #d3c7a3;
+  }
+  
+  .remove-btn {
+    background-color: #8b0000;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .remove-btn:hover {
+    background-color: #a11212;
+  }
+  
+  .submit-btn {
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 200px;
+    margin: 1rem auto;
+  }
+  
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .create-article-wrapper {
+      margin: 1rem;
+      padding: 1rem;
+    }
+  
+    .illuminated-title {
+      font-size: 2rem;
+    }
+  
+    .timeline-input-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .timeline-year,
+    .timeline-event {
+      width: 100%;
+    }
+  
+    .add-timeline-btn {
+      width: 100%;
+    }
+  }
+  /* Add to src/styles/create-article.css */
+.readonly-input {
+    background-color: #e5d9b6; /* Slightly darker parchment */
+    cursor: not-allowed;
+    opacity: 0.8;
+  }

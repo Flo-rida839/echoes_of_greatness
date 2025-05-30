@@ -4,6 +4,7 @@ import { getArticles } from '../utils/api';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import '../styles/home.css';
+import Footer from './Footer'
 
 // Mock data for testing
 const mockArticles = [
@@ -229,6 +230,7 @@ function Home() {
           <Link to="/privacy" className="font-noto mx-2">Privacy</Link>
         </div>
       </footer>
+      <Footer/>
     </div>
   );
 }

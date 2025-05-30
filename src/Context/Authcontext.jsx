@@ -1,7 +1,6 @@
-// src/context/AuthContext.js
 import { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signup, login } from '../utils/api';
+import { signup as apiSignup, login as apiLogin } from '../utils/api';
 
 const AuthContext = createContext();
 
@@ -11,9 +10,9 @@ export function AuthProvider({ children }) {
 
   const signup = async (userData) => {
     try {
-      const response = await signup(userData);
-      setUser(response.user);
-      navigate('/'); // Redirect after signup
+      const response = await apiSignup(userData);
+      setUser(response.user || { email: userData.email }); // Fallback if user not in response
+      navigate('/');
     } catch (error) {
       console.error('Signup error:', error.response?.data?.error || error.message);
       throw error;
@@ -22,9 +21,9 @@ export function AuthProvider({ children }) {
 
   const login = async (credentials) => {
     try {
-      const response = await login(credentials);
-      setUser(response.user);
-      navigate('/'); // Redirect after login
+      const response = await apiLogin(credentials);
+      setUser(response.user || { email: credentials.email }); // Fallback if user not in response
+      navigate('/');
     } catch (error) {
       console.error('Login error:', error.response?.data?.error || error.message);
       throw error;
