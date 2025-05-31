@@ -38,7 +38,7 @@ function Sidebar({ article }) {
       setCurrentIconIndex((prevIndex) => (prevIndex + 1) % historicalIcons.length);
     }, 10000);
     return () => clearInterval(interval);
-  }, []);
+  }, [historicalIcons]); // Fixed: Added historicalIcons
 
   return (
     <aside className="sidebar bg-parchment-light border-parchment p-3 rounded-3 shadow-sm">
@@ -84,7 +84,7 @@ function Sidebar({ article }) {
         </h3>
         <div className="position-relative">
           <img
-            src="https://www.svgrepo.com/download/509107/writing.svg"
+            src="https://media.istockphoto.com/id/184919327/vector/paul-and-tertius-wood-engraving-published-1877.jpg?s=612x612&w=0&k=20&c=Onb_puRtab_3HWtgLnx8hd9FKy8arAYz_VY_Tv4Nzx0="
             alt="Scribe writing"
             className="scribe-cartoon mb-2"
           />

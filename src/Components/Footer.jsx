@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaInstagram, FaTwitter, FaEnvelope, FaMonument } from 'react-icons/fa';
+import { FaInstagram, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import { GiStoneTower } from 'react-icons/gi'; // Alternative for monument icon
 import '../styles/footer.css';
 
 const Footer = () => {
@@ -19,9 +20,9 @@ const Footer = () => {
       <div className="historical-marquee">
         <div className="marquee-content">
           <span>New Article: Decoding Ancient Egyptian Hieroglyphs</span>
-          <FaMonument className="marquee-icon" />
+          <GiStoneTower className="marquee-icon" />
           <span>Featured: The Lost Library of Alexandria</span>
-          <FaMonument className="marquee-icon" />
+          <GiStoneTower className="marquee-icon" />
           <span>Exclusive: Interview with Lead Archaeologist</span>
         </div>
       </div>

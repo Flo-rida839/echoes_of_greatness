@@ -57,10 +57,10 @@ function Navbar() {
                 Privacy
               </Link>
             </li>
-            {user && user.role === 'editor' && (
+            {user && ['editor', 'admin'].includes(user.role) && (
               <li className="nav-item">
                 <Link className="nav-link" to="/admin">
-                  Admin
+                  Admin Dashboard
                 </Link>
               </li>
             )}

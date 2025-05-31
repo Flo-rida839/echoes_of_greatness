@@ -13,20 +13,22 @@ export default function LoginPage() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null);
 
   // Handle OAuth callback
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const username = urlParams.get('username');
-    const role = urlParams.get('role');
-    if (token) {
+    const email = urlParams.get('email') || '';
+    const role = urlParams.get('role') || 'user';
+    const id = urlParams.get('id');
+
+    if (token && id) {
       localStorage.setItem('token', token);
-      setUser({ username, role: role || 'user', email: '' }); // Update context
-      navigate('/');
+      const user = { id: parseInt(id, 10), username, email, role };
+      login({ user, token }); // Use login to set context and redirect
     }
-  }, [navigate]);
+  }, [navigate, login]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,15 +41,14 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await login(formData);
-      navigate('/');
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to enter scroll');
+      setError(err.response?.data?.error || 'Failed to unlock the ancient scroll');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSocialLogin = (provider) => {
+  const handleSocialLogin = async (provider) => {
     setError('');
     setLoading(true);
     try {
@@ -57,7 +58,7 @@ export default function LoginPage() {
         githubLogin();
       }
     } catch (err) {
-      setError(`Failed to login with ${provider}`);
+      setError(`The ${provider} portal refused passage`);
       setLoading(false);
     }
   };
@@ -66,7 +67,7 @@ export default function LoginPage() {
     <div className="auth-wrapper ancient-parchment">
       <form onSubmit={handleSubmit} className="auth-form medieval-flair">
         <h1 className="illuminated-title elegant-drop-shadow">🪶 Enter Ancient Scroll</h1>
-        {error && <p className="error-message">{error}</p>}
+        {error && <p className="error-message medieval-flair">{error}</p>}
         
         <div className="form-group">
           <label htmlFor="email">Scroll of Contact (Email)</label>
@@ -101,7 +102,7 @@ export default function LoginPage() {
           disabled={loading}
           className="auth-btn medieval-flair"
         >
-          {loading ? 'Entering...' : '🔐 Enter Scroll'}
+          {loading ? 'Unveiling...' : '🔐 Enter Scroll'}
         </button>
 
         <div className="social-login">
@@ -134,7 +135,7 @@ export default function LoginPage() {
         </div>
 
         <p className="auth-link">
-          No scroll yet? <Link to="/signup" className="underline">Craft one</Link>
+          No scroll yet? <Link to="/register" className="underline">Craft one</Link>
         </p>
       </form>
     </div>

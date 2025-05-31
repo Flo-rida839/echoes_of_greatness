@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { getArticles } from '../utils/api';
 import Navbar from './Navbar';
@@ -46,7 +46,7 @@ function Home() {
 
   const maxRetries = 3;
 
-  const fetchArticles = async () => {
+  const fetchArticles = useCallback(async () => {
     try {
       const data = await getArticles();
       setArticles(data);
@@ -68,11 +68,11 @@ function Home() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [retryCount]); // Dependencies: retryCount for retry logic
 
   useEffect(() => {
     fetchArticles();
-  }, []);
+  }, [fetchArticles]); // Fixed: Added fetchArticles
 
   if (loading) {
     return (
@@ -81,7 +81,7 @@ function Home() {
           Unfurling the Chronicles...
         </h3>
         <img
-          src="https://danamartist.tumblr.com/post/612044507355250688/another-gif-attempt-flickering-candle-making/amp"
+          src="https://64.media.tumblr.com/4eebad8da97072af73e718c88a1b9a67/ec8b89c78b781b67-0d/s1280x1920/40e31e394f23110f8a7727a5bbedb97300c68383.gif"
           alt="Flickering candle"
           className="candle-gif mb-3"
           onError={(e) => (e.target.src = 'https://i.ibb.co/c2qY8zv/candle.png')}
@@ -216,13 +216,13 @@ function Home() {
       </div>
       <footer className="footer text-center">
         <img
-          src="https://tenor.com/search/flipping-pages-gifs"
+          src="https://media.tenor.com/VRDekoikVqEAAAAM/hellsing-book.gif"
           alt="Turning book pages"
           className="book-gif mb-3"
           onError={(e) => (e.target.src = 'https://i.ibb.co/5Y0Z7pS/book.png')}
         />
         <p className="font-noto mb-2">
-          © {new Date().getFullYear()} Chronicles of Antiquity. All rights reserved.
+          © {new Date().getFullYear()} Echoes of. All rights reserved.
         </p>
         <div className="footer-links">
           <Link to="/about" className="font-noto mx-2">About</Link>

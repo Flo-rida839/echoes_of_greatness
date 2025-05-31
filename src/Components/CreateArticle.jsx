@@ -19,14 +19,14 @@ function CreateArticle() {
     author_id: user?.id || ''
   });
   const [loading, setLoading] = useState(false);
+  const [dataLoading, setDataLoading] = useState(true);
   const [error, setError] = useState(null);
   const [availableThemes, setAvailableThemes] = useState([]);
   const [availableFigures, setAvailableFigures] = useState([]);
   const [newTimelineEvent, setNewTimelineEvent] = useState({ year: '', event: '' });
 
-  // Fetch available themes and figures for selection
+  // Fetch themes and figures
   useEffect(() => {
-    console.log('CreateArticle useEffect running');
     const fetchData = async () => {
       try {
         const [themesResponse, figuresResponse] = await Promise.all([
@@ -36,8 +36,10 @@ function CreateArticle() {
         setAvailableThemes(Array.isArray(themesResponse.data) ? themesResponse.data : []);
         setAvailableFigures(Array.isArray(figuresResponse.data) ? figuresResponse.data : []);
       } catch (err) {
-        setError('Failed to load themes');
-        console.error('CreateArticle fetch error:', err);
+        setError('Failed to fetch scrolls and themes');
+        console.error('Fetch error:', err);
+      } finally {
+        setDataLoading(false);
       }
     };
     fetchData();
@@ -45,9 +47,7 @@ function CreateArticle() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Parse author_id as integer, allow empty string for clearing
-    const parsedValue = name === 'author_id' ? (value === '' ? '' : parseInt(value, 10)) : value;
-    setFormData(prev => ({ ...prev, [name]: parsedValue }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleTimelineChange = (e) => {
@@ -82,16 +82,15 @@ function CreateArticle() {
     setLoading(true);
     setError(null);
 
-    // Validate author_id
     if (!formData.author_id || formData.author_id <= 0) {
-      setError('Invalid User ID');
+      setError('Invalid Scribe ID');
       setLoading(false);
       return;
     }
 
     try {
       const token = localStorage.getItem('token');
-      if (!token) throw new Error('No authentication token found');
+      if (!token) throw new Error('No sacred token found');
       await axios.post('https://flowurr27.pythonanywhere.com/api/admin/articles', formData, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -99,26 +98,52 @@ function CreateArticle() {
       });
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to create article');
-      console.error('CreateArticle submit error:', err);
+      setError(err.response?.data?.error || 'Failed to inscribe scroll');
+      console.error('Submit error:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  // Redirect or show error if not logged in or not authorized
-  if (!user || !['editor', 'admin'].includes(user.role)) {
+  // Guard clauses for unauthorized access or missing user
+  if (!user) {
+    return (
+      <div className="create-article-wrapper ancient-parchment">
+        <h1 className="illuminated-title elegant-drop-shadow">Access Forbidden</h1>
+        <p className="medieval-flair">You must be inscribed as a scribe to craft scrolls.</p>
+      </div>
+    );
+  }
+
+  if (!['editor', 'admin'].includes(user.role)) {
     return (
       <div className="create-article-wrapper ancient-parchment">
         <h1 className="illuminated-title elegant-drop-shadow">Access Denied</h1>
-        <p className="medieval-flair">You must be logged in as an editor or admin to create articles.</p>
+        <p className="medieval-flair">Only scribes of high rank may craft scrolls.</p>
+      </div>
+    );
+  }
+
+  if (!user.id) {
+    return (
+      <div className="create-article-wrapper ancient-parchment">
+        <h1 className="illuminated-title elegant-drop-shadow">Scroll Error</h1>
+        <p className="medieval-flair">Your scribe identity could not be verified.</p>
+      </div>
+    );
+  }
+
+  if (dataLoading) {
+    return (
+      <div className="create-article-wrapper ancient-parchment">
+        <p className="medieval-flair">Unveiling ancient themes and scrolls...</p>
       </div>
     );
   }
 
   return (
     <div className="create-article-wrapper ancient-parchment">
-      <h1 className="illuminated-title elegant-drop-shadow">Create New Scroll</h1>
+      <h1 className="illuminated-title elegant-drop-shadow">Craft New Scroll</h1>
       
       {error && (
         <div className="error-message medieval-flair">
@@ -128,7 +153,7 @@ function CreateArticle() {
 
       <form onSubmit={handleSubmit} className="article-form">
         <div className="form-group">
-          <label htmlFor="author_id">User ID</label>
+          <label htmlFor="author_id">Scribe ID</label>
           <input
             type="number"
             id="author_id"
@@ -288,7 +313,7 @@ function CreateArticle() {
           disabled={loading}
           className="submit-btn medieval-flair"
         >
-          {loading ? 'Inscribing Scroll...' : 'Create Scroll'}
+          {loading ? 'Inscribing Scroll...' : 'Inscribe Scroll'}
         </button>
       </form>
     </div>

@@ -1,28 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router } from 'react-router-dom';
+import App from './App.js';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-// import ErrorBoundary from './components/ErrorBoundary';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// JavaScript version (use this if NOT using TypeScript)
 const rootElement = document.getElementById('root');
 if (!rootElement) {
-  throw new Error('Failed to find the root element');
+  console.error('Scribe’s Error: No root element found in the sacred parchment (index.html). Ensure <div id="root"></div> exists.');
+  throw new Error('No root element found');
 }
 
 const root = ReactDOM.createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    {/* <ErrorBoundary> */}
-      <Router>
-        <App />
-      </Router>
-    {/* </ErrorBoundary> */}
+    <App />
   </React.StrictMode>
 );
-
-// Using console logging for web vitals (recommended for development)
-reportWebVitals(console.log);
