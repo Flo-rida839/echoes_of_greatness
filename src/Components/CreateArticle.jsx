@@ -16,7 +16,7 @@ function CreateArticle() {
     timeline: [],
     related_figures: [],
     themes: [],
-    author_id: user?.id || ''
+    author_id: user?.id || 0 // Default to 0 if undefined
   });
   const [loading, setLoading] = useState(false);
   const [dataLoading, setDataLoading] = useState(true);
@@ -24,6 +24,11 @@ function CreateArticle() {
   const [availableThemes, setAvailableThemes] = useState([]);
   const [availableFigures, setAvailableFigures] = useState([]);
   const [newTimelineEvent, setNewTimelineEvent] = useState({ year: '', event: '' });
+
+  // Debug user data
+  useEffect(() => {
+    console.log('User:', user);
+  }, [user]);
 
   // Fetch themes and figures
   useEffect(() => {
@@ -36,7 +41,7 @@ function CreateArticle() {
         setAvailableThemes(Array.isArray(themesResponse.data) ? themesResponse.data : []);
         setAvailableFigures(Array.isArray(figuresResponse.data) ? figuresResponse.data : []);
       } catch (err) {
-        setError('Failed to fetch scrolls and themes');
+        setError('Failed to fetch scrolls and themes. Please try again.');
         console.error('Fetch error:', err);
       } finally {
         setDataLoading(false);
@@ -83,14 +88,15 @@ function CreateArticle() {
     setError(null);
 
     if (!formData.author_id || formData.author_id <= 0) {
-      setError('Invalid Scribe ID');
+      setError('Invalid Scribe ID. Please log in again.');
       setLoading(false);
       return;
     }
 
     try {
       const token = localStorage.getItem('token');
-      if (!token) throw new Error('No sacred token found');
+      console.log('Token:', token); // Debug token
+      if (!token) throw new Error('No sacred token found. Please log in again.');
       await axios.post('https://flowurr27.pythonanywhere.com/api/admin/articles', formData, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -98,37 +104,56 @@ function CreateArticle() {
       });
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to inscribe scroll');
+      const errorMessage = err.response?.data?.error || 'Failed to inscribe scroll. Please try again.';
+      setError(errorMessage);
       console.error('Submit error:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  // Guard clauses for unauthorized access or missing user
+  // Guard clauses with improved feedback
   if (!user) {
     return (
       <div className="create-article-wrapper ancient-parchment">
         <h1 className="illuminated-title elegant-drop-shadow">Access Forbidden</h1>
         <p className="medieval-flair">You must be inscribed as a scribe to craft scrolls.</p>
+        <button
+          onClick={() => navigate('/login')}
+          className="btn btn-amber font-noto text-white hover-scale"
+        >
+          To the Login Chamber
+        </button>
       </div>
     );
   }
 
-  if (!['editor', 'admin'].includes(user.role)) {
+  if (!['editor', 'admin'].includes(user?.role?.toLowerCase())) {
     return (
       <div className="create-article-wrapper ancient-parchment">
         <h1 className="illuminated-title elegant-drop-shadow">Access Denied</h1>
-        <p className="medieval-flair">Only scribes of high rank may craft scrolls.</p>
+        <p className="medieval-flair">Only scribes of high rank (editor or admin) may craft scrolls.</p>
+        <button
+          onClick={() => navigate('/')}
+          className="btn btn-amber font-noto text-white hover-scale"
+        >
+          Return to Sanctum
+        </button>
       </div>
     );
   }
 
-  if (!user.id) {
+  if (!user.id || user.id <= 0) {
     return (
       <div className="create-article-wrapper ancient-parchment">
         <h1 className="illuminated-title elegant-drop-shadow">Scroll Error</h1>
-        <p className="medieval-flair">Your scribe identity could not be verified.</p>
+        <p className="medieval-flair">Your scribe identity could not be verified. Please log in again.</p>
+        <button
+          onClick={() => navigate('/login')}
+          className="btn btn-amber font-noto text-white hover-scale"
+        >
+          To the Login Chamber
+        </button>
       </div>
     );
   }
@@ -136,6 +161,7 @@ function CreateArticle() {
   if (dataLoading) {
     return (
       <div className="create-article-wrapper ancient-parchment">
+        <h1 className="illuminated-title elegant-drop-shadow">Preparing the Scriptorium...</h1>
         <p className="medieval-flair">Unveiling ancient themes and scrolls...</p>
       </div>
     );
@@ -284,11 +310,15 @@ function CreateArticle() {
             onChange={(e) => handleMultiSelectChange(e, 'related_figures')}
             className="form-select"
           >
-            {availableFigures.map(figure => (
-              <option key={figure.id} value={figure.id}>
-                {figure.title}
-              </option>
-            ))}
+            {availableFigures.length === 0 ? (
+              <option disabled>No figures available</option>
+            ) : (
+              availableFigures.map(figure => (
+                <option key={figure.id} value={figure.id}>
+                  {figure.title}
+                </option>
+              ))
+            )}
           </select>
         </div>
 
@@ -300,11 +330,15 @@ function CreateArticle() {
             onChange={(e) => handleMultiSelectChange(e, 'themes')}
             className="form-select"
           >
-            {availableThemes.map(theme => (
-              <option key={theme.id} value={theme.id}>
-                {theme.title}
-              </option>
-            ))}
+            {availableThemes.length === 0 ? (
+              <option disabled>No themes available</option>
+            ) : (
+              availableThemes.map(theme => (
+                <option key={theme.id} value={theme.id}>
+                  {theme.title}
+                </option>
+              ))
+            )}
           </select>
         </div>
 

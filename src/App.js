@@ -9,7 +9,7 @@ import Privacy from './Components/Privacy.jsx';
 import Login from './Components/Login.jsx';
 import Signup from './Components/Signup.jsx';
 import CreateArticle from './Components/CreateArticle.jsx';
-import AdminDashboard from './Components/AdminDashboard';
+import AdminDashboard from './Components/AdminDashboard.jsx';
 import Navbar from './Components/Navbar.jsx';
 import './index.css';
 import { AuthProvider } from './Context/Authcontext.jsx';
@@ -17,7 +17,9 @@ import { AuthProvider } from './Context/Authcontext.jsx';
 // Protected Route component
 function ProtectedRoute({ children }) {
   const { user } = useAuth();
-  if (!user || !['editor', 'admin'].includes(user.role)) {
+  console.log('ProtectedRoute user:', user); // Debug user
+  if (!user || !['editor', 'admin'].includes(user?.role?.toLowerCase())) {
+    console.log('Redirecting to /login due to invalid user or role');
     return <Navigate to="/login" replace />;
   }
   return children;
@@ -25,8 +27,8 @@ function ProtectedRoute({ children }) {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
+    <Router>
+      <AuthProvider>
         <div className="App">
           <Navbar />
           <div className="content-wrapper">
@@ -58,8 +60,8 @@ function App() {
             </Routes>
           </div>
         </div>
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

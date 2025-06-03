@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../Context/Authcontext';
 import '../styles/navbar.css';
+import { toast } from 'react-toastify';
 
 function Navbar() {
   const { user, logout } = useAuth();
@@ -11,6 +12,7 @@ function Navbar() {
 
   const handleLogout = () => {
     logout();
+    toast.info('Logged out successfully');
   };
 
   return (
@@ -65,21 +67,24 @@ function Navbar() {
               </li>
             )}
             {user ? (
-              <>
-                <li className="nav-item">
-                  <div className="profile-avatar bg-amber-700 text-white font-cinzel rounded-full w-8 h-8 flex items-center justify-center mx-2">
-                    {getInitial(user.username)}
-                  </div>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className="btn btn-amber btn-sm mx-2 my-1 font-noto text-white hover-scale"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
-                </li>
-              </>
+              <li className="nav-item dropdown">
+                <button
+                  className="btn dropdown-toggle profile-avatar bg-amber-700 text-white font-cinzel rounded-full w-8 h-8 d-flex align-items-center justify-content-center mx-2"
+                  id="userDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {getInitial(user.username)}
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                  <li>
+                    <Link className="dropdown-item" to="/profile">Profile</Link>
+                  </li>
+                  <li>
+                    <button className="dropdown-item text-danger" onClick={handleLogout}>Logout</button>
+                  </li>
+                </ul>
+              </li>
             ) : (
               <>
                 <li className="nav-item">
